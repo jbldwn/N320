@@ -13,19 +13,56 @@ for(type of genres){
 
 //music Preference
 
-document.querySelectorAll('p')[1].innerHTML = "My favorite genre of music is " + genres[4] + ".";
+document.querySelectorAll('p')[2].innerHTML = "My favorite genre of music is " + genres[4] + ".";
 
 //animals
-function animals (breed, color){
-    document.getElementById("animals").innterHTML += "I have a " + breed + ""
+
+let pets = ["German Daschund", "Cat", "Cat"];
+
+let title =["Remington", "Amelia", "Nougat"]
+let coats = ["A Red Boar Hair", "Delute Calico", "Delute Tortie"];
+
+function animals (breed, name, color){
+    document.getElementById("animals").innerHTML += "I have a " + breed + ", named "+ name + ", that is " + color + ". <br>";
+
+    // console.log( breed + name + color);
+}
+
+for (let i = 0; i < pets.length; i++) {
+    const animal = pets[i];
+    const name = title[i];
+    const coat = coats[i];
+
+    animals(animal, name, coat);
+    
 }
 
 //name and color
-function getName(){
-    var userName = document.getElementById("myName").value;
-    var color = prompt("Welcome " + userName + "! What is your favorite color?");
-    document.getElementsByTagName('body')[0].style.backgroundColor=color;
+
+function changeColor(color){
+    document.getElementsByTagName('body')[0].style.backgroundColor = color;
 }
+
+function prompt(message){
+    document.getElementById('prompt').innerHTML = message;
+}
+function getName(){
+    //establish elements
+    var userName = document.getElementById("myName");
+    var userColor = document.getElementById("color");
+
+    //change prompt
+    var color = prompt("Welcome " + userName.value + "! What is your favorite color?");
+
+    //update inputs
+    userName.style.display = "none";
+    userColor.style.display = "block";
+
+    //updatelistener
+    document.getElementsByTagName('button')[0].addEventListener('click', changeColor(userColor.value));
+}
+
+document.getElementsByTagName('button')[0].addEventListener('click', getName);
 
 //numbers
 function getNumber(){
@@ -33,10 +70,10 @@ function getNumber(){
     do{
         if(userNum>=7){
             if(userNum%7==0){
-                alert(userNum + " is the first number divisible by 7.");
+                alert(userNum + " is divisible by 7.");
                 break;
             }
-            console.log("not yet...");
+            alert("not yet...");
             userNum--;
         } else{
             alert("No matches");
@@ -45,4 +82,4 @@ function getNumber(){
     } while(userNum<7)
 }
 
-document.getElementsByTagName('button')[0].addEventListener('click', getNumber)
+document.getElementsByTagName('button')[1].addEventListener('click', getNumber)

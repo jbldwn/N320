@@ -51,9 +51,11 @@
         prompt that will read: Welcome, Steve! What is your favorite color? You
         will then change the page background to that color.
       </p>
+      <label for="input" id="prompt">What is your name?</label><br />
       <input type="text" id="myName" />
+      <input type="text" id="color" style="display: none" />
+
       <button>Click Here</button>
-      <input type="text" id="color" />
     </section>
     <section>
       <h1>Pick a number</h1>
@@ -67,6 +69,9 @@
         Run "Not yet..." for no matches; run "No matches... sorry!" for numbers
         under 7.
       </p>
+      <label for="number"></label>
+      <input type="number" id="numPick" />
+      <button>Submit Guess</button>
     </section>
 
     <script src="app/app.js"></script>
