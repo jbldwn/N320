@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loops</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>
+      const Course = {
+        cNum: "N320",
+        cTitle: "Introduction to Vue",
+        offering: ["fall", "spring", "summer"],
+        prerq: false,
+        offering: ["fall", "spring", "summer"],
+        limit: 20,
+      };
+      let seasons = ["fall", "summer", "spring", "summer"];
+      let holiday = "halloween";
+
+      //For...in
+
+      for (property in Course) {
+        console.log(property + ": " + Course[property]);
+      }
+      for (s in seasons) {
+        console.log(s + ": " + seasons[s]);
+      }
+      for (h in holiday) {
+        console.log(h + ": " + holiday[h]);
+      }
+
+      //For...of
+      /* does't work on objects or keyed arrays */
+      /* for (p of Course) {
+        console.log(p + ": " + Course[p]);
+      } */
+      for (s of seasons) {
+        console.log("For of: ", s);
+      }
+      for (h of holiday) {
+        console.log("For of: ", h);
+      }
+    </script>
+  </head>
+  <body></body>
+</html>

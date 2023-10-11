@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Classes</title>
+    <script>
+      class Person {
+        constructor(name, age) {
+          this.name = name;
+          this.age = age;
+        }
+        greeting() {
+          console.log(`Welcome, ${this.name}! You are ${this.age} years old`);
+        }
+      }
+
+      let will = new Person("William", 21);
+      will.greeting();
+
+      //extending classes
+      class Student extends Person {
+        constructor(name, age, major, fact) {
+          super(name, age);
+          this.major = major;
+          this.fact = fact;
+        }
+        iceBreaker() {
+          super.greeting();
+          console.log(
+            `My name is ${this.name}, and I ammajoring in ${this.major}.`
+          );
+          console.log(`A fun fact about me is ${this.fact}.`);
+        }
+      }
+
+      let jennifer = new Student(
+        "Jennifer",
+        33,
+        "Media Arts and Science",
+        "my chin is numb"
+      );
+      jennifer.iceBreaker();
+
+      class Vehicle {
+        constructor(make, model, year) {
+          this.make = make;
+          this.model = model;
+          this.year = year;
+        }
+        registration() {
+          return `This vehicle is a ${this.year} ${this.make} ${this.model}.`;
+        }
+      }
+
+      class Car extends Vehicle {
+        constructor(doors, transmission, ...args) {
+          super(...args);
+          this.doors = doors;
+          this.transmission = transmission;
+          this.wheels = 4;
+        }
+      }
+      let irwin = new Car(5, "automatic", "Subaru", "Outback", "2004");
+      console.log(irwin.registration());
+      console.log(irwin.doors, irwin.transmission, irwin.wheels);
+      class Bicyle extends Vehicle {
+        constructor() {
+          super(...arguments);
+          this.wheels = 2;
+        }
+        caution() {
+          return "Wear your helmet";
+        }
+      }
+
+      let sven = new Bicyle("schwinn", "MaxM3", 2022);
+      console.log(sven.registration());
+      console.log(sven.caution());
+    </script>
+  </head>
+  <body></body>
+</html>
