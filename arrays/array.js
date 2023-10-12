@@ -197,13 +197,14 @@ console.log("value * index: ", vtIndex([1, 2, 3, 4]));
 let arrChal = [1, 2, 3, 4, 5];
 
 var reduceFn = arrChal.reduce(function (accumulator, nextValue) {
-    let num = nextValue * nextValue;
-    console.log("num value: ", num);
-    if (num % 2 == 0) {
-        return accumulator + num;
-    }
+    accumulator += nextValue;
+    // let num = nextValue + nextValue;
+    // console.log("num value: ", num);
+    // if (num % 2 == 0) {
+    //     return accumulator + num;
+    // }
     return accumulator;
-}, 50)
+}, 0)
 
 console.log("reduce function: ", reduceFn);
 
