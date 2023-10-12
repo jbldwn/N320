@@ -108,6 +108,9 @@ let studentSummaries = students.map((student) => {
     let average = gradeAvg(grades);
     return { Name: student.name, Average: average };
 })
+
+/* Display */
+
 if (studentSummaries) {
     studentSummaries.forEach(summary => {
         let summaryPost = document.getElementById('studentAvgs');
@@ -116,32 +119,23 @@ if (studentSummaries) {
 }
 
 /* __  Use the reduce method to calculate the total number of grades across all students.Display your result in the appropriate HTML element.  */
-function totalGrades(grades) {
-    let total = grades.reduce((accm, next) => {
-        accm += next;
-        return accm;
-    }, 0);
-    return total;
-}
-let classAccum = []
-let stuAccum =
-    students.forEach(student => {
-        let grades = student.grades;
-        let stuSum = totalGrades(grades);
-        classAccum.push(stuSum)
-    });
-let classTotal = classAccum.reduce((accm, next) => {
-    accm += next;
+
+let totalScores = students.reduce((accm, next) => {
+    const stuScoreTotal = next.grades.length;
+    accm += stuScoreTotal;
     return accm;
 }, 0);
-if (classAccum != null) {
+
+/* Display */
+
+if (totalScores != null) {
     let classInfo = document.getElementsByTagName('p');
 
     for (let i = 0; i < classInfo.length; i++) {
         const pTag = classInfo[i];
         const pInfo = pTag.innerHTML
         if (pInfo.indexOf('Total') !== -1) {
-            pTag.innerHTML += ` ${classTotal}`
+            pTag.innerHTML += ` ${totalScores}`
         }
     }
 }
