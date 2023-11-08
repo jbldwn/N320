@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="app.js" defer></script>
+    <style>
+      span {
+        font-size: 3px;
+      }
+      h6 {
+        font-size: 8px;
+      }
+      h6 span {
+        font-size: 1px;
+      }
+    </style>
+    <title>Assignment 6</title>
+  </head>
+  <body>
+    <div id="app">
+      <header id="container">
+        <h1>{{name}}</h1>
+        <h2>{{course}}: {{assignment}}</h2>
+        <h3>{{dueDate}}</h3>
+        <h4>Difficulty: {{difficutly}}/5</h4>
+        <h5>Fun: {{fun}}/10 <span>(does not scale)</span></h5>
+        <h6>
+          Frustration: {{frustration}}/5<span>(does , in-fact, scale)</span>
+        </h6>
+
+        <hr />
+      </header>
+      <h1>The Colors of Bob Ross:</h1>
+
+      <ul>
+        <li v-for="color in myList">{{color}}</li>
+      </ul>
+      <button @click="favorite">Favorite Color</button>
+      <p><i>{{prefText}}</i></p>
+
+      <input type="text" v-model="newColor" />
+
+      <button @click="addColor">Add {{newColor}} to list</button>
+      <p><i>{{colorAdd}}</i></p>
+    </div>
+  </body>
+</html>
