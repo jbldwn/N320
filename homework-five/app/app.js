@@ -47,26 +47,15 @@ class Catalog {
     addItem(...item) {
         this.availableLog.push(...item);
     }
-    removeItem(id) {
-        console.log(id);
+    removeItem() {
+        let rando = Math.floor(Math.random() * this.availableLog.length);
+        let rselect = this.availableLog[`${rando}`].id;
 
-        // remove from this.catalog by id
-        for (const media in this.availableLog) {
-            if (Object.hasOwnProperty.call(this.availableLog, media)) {
-                console.log(median);
-                const element = this.availableLog[media];
-                if (element.id === id) {
-                    console.log(element);
-                    console.log(this.availableLog);
-                    this.availableLog.pop(element)
-                    console.log(this.availableLog);
-                    console.log(this.availableLog);
-                }
-            }
-        }
+        this.availableLog = this.availableLog.filter(function (obj) {
+            return obj.id !== rselect;
+        })
 
-
-        this.displayCatalog(entireLog[1]);
+        libCat.displayCatalog(entireLog[1]);
     }
     totalValue() {
         // calculate and return the total value of all the catalog items.
@@ -82,88 +71,65 @@ class Catalog {
         return cashVal;
     }
 
-    getDetails(item) {
-        let detailKeys = [];
-        for (const key of Object.keys(item)) {
-            if (key == "id" || key == "value" || key == "title" || key == "pubYear") {
+    displayCatalog(divEl) {
+
+        /* reset second Div */
+        if (divEl === document.getElementsByTagName("div")[1]) {
+            let htmlCollection = document.getElementsByTagName("div")[1];
+            htmlCollection.innerHTML = `<h2 class="desc"></h2>`
+        }
+        if (divEl != null) {
+            // display the items in the catalog, including the titles (italicized), publication data, value, and additional properties specific to the media type.
+
+            const paras = divEl.getElementsByTagName('p');
+
+            for (let i = 0; i < paras.length; i++) {
+                const para = paras[i];
+                para.remove();
+            }
+
+            /* extract elements from doc */
+            const logTitle = divEl.getElementsByClassName("desc");
+
+            if (divEl == document.getElementsByTagName("div")[0]) {
+                logTitle[0].innerHTML = "Catalog Items:";
 
             } else {
-                detailKeys.push(key);
+                logTitle[0].innerHTML = "Updated Catalog Items:";
             }
-        }
 
-        for (let i = 0; i < detailKeys.length; i++) {
-            const detailTitle = detailKeys[i];
-            let detailName = item[detailTitle];
+            for (const item in this.availableLog) {
+                if (Object.hasOwnProperty.call(this.availableLog, item)) {
+                    const element = this.availableLog[item];
 
-            let detail = `${detailTitle}: ${detailName}`;
-            console.log(detail);
-        }
-        let creatorTitle = detailKeys[0];
-        let creatorName = item[creatorTitle];
+                    let title = element.title;
+                    let value = element.value;
 
-        console.log(detailKeys);
+                    let dTitleOne = Object.keys(element)[4];
+                    let dNameOne = element[dTitleOne];
+                    let dTitleTwo = Object.keys(element)[5];
+                    let dNameTwo = element[dTitleTwo];
 
-        return `${creatorTitle}: ${creatorName}`
-    }
+                    if (dTitleTwo == "Runtime") {
+                        dNameTwo += ` minutes`;
+                    }
 
-    displayCatalog(divEl) {
-        // display the items in the catalog, including the titles (italicized), publication data, value, and additional properties specific to the media type.
+                    let details = `${dTitleOne}: ${dNameOne}, ${dTitleTwo}: ${dNameTwo}`
 
-        const paras = divEl.getElementsByTagName('p');
-        const last = divEl.getElementsByTagName('h4');
-        for (let i = 0; i < paras.length; i++) {
-            const para = paras[i];
-            para.remove();
-        }
-        // last.remove();
-
-
-        /* extract elements from doc */
-        const logTitle = divEl.getElementsByClassName("desc");
-
-        if (divEl == document.getElementsByTagName("div")[0]) {
-            logTitle[0].innerHTML = "Catalog Items:";
-
-        } else {
-            logTitle[0].innerHTML = "Updated Catalog Items:";
-        }
-
-        for (const item in this.availableLog) {
-            if (Object.hasOwnProperty.call(this.availableLog, item)) {
-                const element = this.availableLog[item];
-
-                let title = element.title;
-                let value = element.value;
-
-                let dTitleOne = Object.keys(element)[4];
-                let dNameOne = element[dTitleOne];
-                let dTitleTwo = Object.keys(element)[5];
-                let dNameTwo = element[dTitleTwo];
-
-                if (dTitleTwo == "Runtime") {
-                    dNameTwo += ` minutes`;
+                    divEl.innerHTML += `<p><span>${title}</span> - $${value} (${details})</p>`;
                 }
-
-                let details = `${dTitleOne}: ${dNameOne}, ${dTitleTwo}: ${dNameTwo}`
-
-                divEl.innerHTML += `<p><span>${title}</span> - $${value} (${details})</p>`;
             }
-        }
 
-        /* Display total Value */
-        divEl.innerHTML +=
-            `<h4 class="final">Total Value of Catalog: $${this.totalValue()}</h4>`;
+            /* Display total Value */
+            divEl.innerHTML +=
+                `<h4 class="final">Total Value of Catalog: $${this.totalValue()}</h4>`;
+        }
 
         /* remove random */
-        if (divEl == document.getElementsByTagName("div")[0]) {
-            let choiceIndex = Math.floor(Math.random() * 4);
-            let choiceID = this.availableLog[`${choiceIndex}`].id;
-
-            this.removeItem(choiceID);
+        if (divEl === document.getElementsByTagName("div")[0]) {
+            this.removeItem();
+        } else {
         }
-
-
     }
 }
 
@@ -176,19 +142,23 @@ let gg = new DVD("Gone Girl", 2014, 14.99, "David Fincher", "149");
 let hp = new DVD("Harry Potter", 2001, 14.99, "Chris Columbus", "152");
 let ts89 = new CD("1989 (Taylor's Version)", 2023, 13.99, "Taylor Swift", 22);
 
+/* adding items to cataloge */
 libCat.addItem(ts89, hp, gg, gone);
 
 
-//add title
+/* printing title */
 let title = document.getElementsByTagName('h1');
 title[0].innerHTML = "Library Catalog";
 
-//display catalog items
+/* display catalog items */
 let entireLog = document.getElementsByTagName("div");
 libCat.displayCatalog(entireLog[0]);
 
-// const button = document.createElement("button");
-// button.innerHTML = "Checkout Random";
-// document.body.insertBefore(button, entireLog[2])
-// console.log(button);
-// button.onclick = function () { libCat.removeItem() };
+/* add button to remove */
+const body = document.getElementsByTagName("body")[0];
+body.innerHTML += `<button>Check Out Item</button>`;
+const btn = body.getElementsByTagName("button")[0];
+btn.addEventListener("click", (e) => {
+    libCat.removeItem();
+
+})
