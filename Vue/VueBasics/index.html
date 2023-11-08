@@ -14,7 +14,41 @@
       <!-- {{}} is called interpolation -->
       <p>{{courseGoal1}}</p>
       <p>{{courseGoal2}}</p>
-      <p></p>
+      <p v-html="courseGoal3"></p>
+
+      <button v-on:click="add">Add</button>
+      <button v-on:click="remove">Remove</button>
+      <p>Count: {{counter}}</p>
+
+      <!-- this is a two-way databind v-bind & v-on -->
+
+      <!-- <input type="text" v-bind:value="name" v-on:input="setName" /> -->
+
+      <!-- This is a two-way databind combined v-model -->
+
+      <input type="text" v-model="name" />
+
+      <p>{{name}}</p>
+      <p>{{fullName}}</p>
+      <p>Name Length: {{nameData[0]}}</p>
+      <p>Middle Character: {{nameData[1]}}</p>
+      <button v-on:click="resetName">Reset Name</button>
+
+      <!-- 
+      ***** short hand notes *****
+
+      @ is short for v-on
+      click.="resetName"
+
+      : is short for v-bind
+      :href="vueLink" 
+      -->
+
+      <!-- prevent, avoids page reset -->
+      <!-- <form v-on:submit.prevent="submitForm">
+        <input v-on:keyup.space="consoleMe" type="text" />
+        <button>Sign Up</button>
+      </form> -->
     </section>
   </body>
 </html>
