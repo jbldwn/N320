@@ -1,9 +1,8 @@
 <template>
     <header>
         <nav>
-            <RouterLink to="/">Home</RouterLink>
-            <RouterLink to="/members">Members</RouterLink>
-            <!-- <RouterLink :to="{ name: 'props' }">Props</RouterLink> -->
+            <RouterLink class="links" to="/members">Members</RouterLink>
+            <RouterLink class="links" to="/teams">Teams</RouterLink>
         </nav>
     </header>
 </template>
@@ -11,11 +10,23 @@
 <style scoped>
 nav {
     /* margin: 0 auto; */
-    width: 30vw;
-    /* background-color: red; */
+    width: 100vw;
+    height: 50px;
+    background-color: black;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    font-size: 18px;
 
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+a.router-link-active {
+    font-style: italic;
+    text-decoration: underline;
 }
 </style>

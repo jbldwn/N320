@@ -1,19 +1,12 @@
 <template>
     <div class="member">
-        <div>
-            <h2>{{ name }}</h2>
-            <p>Role: {{ role }}</p>
-            <div v-if="visibleData">
-                <p>Phone: {{ phone }}</p>
-                <p>Email: {{ email }}</p>
-                <p>Team: {{ team }}</p>
-            </div>
+        <h2>{{ name }}</h2>
+        <p>Role: {{ role }}</p>
+        <div class="details">
+            <p>Phone: {{ phone }}</p>
+            <p>Email: {{ email }}</p>
+            <p>Team: {{ team }}</p>
         </div>
-        <div class="ctrlPanel">
-            <button v-if="!team" @click="addTeam(name)">Join Team</button>
-            <button @click="toggleDetails">{{ visibleData ? "Hide" : "Show" }} details</button>
-        </div>
-
     </div>
 </template>
 
@@ -21,10 +14,8 @@
 export default {
     data() {
         return {
-            visibleData: false
         }
     },
-    emits: ["addTeam"],
     props: {
         name: String,
         role: String,
@@ -32,14 +23,6 @@ export default {
         email: String,
         team: String,
     },
-    methods: {
-        toggleDetails() {
-            this.visibleData = !this.visibleData;
-        },
-        addTeam(member) {
-            this.$emit('addTeam', member);
-        }
-    }
 }
 </script>
 
@@ -59,8 +42,8 @@ export default {
     margin-bottom: 40px;
     border-radius: 30px;
 
-    display: flex;
-    justify-content: space-between;
+    /* display: flex; */
+    /* justify-content: space-between; */
 }
 
 button {
@@ -82,5 +65,12 @@ h2 {
 
 p {
     margin: 0 30px;
+}
+
+.details {
+    margin: 15px auto;
+    background-color: lightskyblue;
+
+    border-radius: 15px;
 }
 </style>

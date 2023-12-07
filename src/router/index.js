@@ -1,24 +1,23 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from '../views/HomeView.vue'
 import MembersView from '../views/MembersView.vue'
+import TeamsView from '../views/TeamView.vue'
 
 const routes = [
     {
         path: '/',
         name: 'home',
-        component: HomeView
+        component: MembersView
     },
     {
         path: '/members',
         name: 'members',
-        //lazy loading
-        component: () => import('../views/MembersView.vue')
+        component: MembersView
     },
-    // {
-    //     path: '/props',
-    //     name: 'props',
-    //     component: PropsSlots
-    // }
+    {
+        path: '/teams',
+        name: 'teams',
+        component: TeamsView
+    },
 ]
 
 //Create Router
